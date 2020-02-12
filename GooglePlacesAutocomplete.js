@@ -136,7 +136,7 @@ export default class GooglePlacesAutocomplete extends Component {
     return [...res, ...results];
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this._request = this.props.debounce
       ? debounce(this._request, this.props.debounce)
       : this._request;
@@ -833,7 +833,13 @@ export default class GooglePlacesAutocomplete extends Component {
     return null;
   };
   render() {
-    let {onFocus, clearButtonMode, ...userProps} = this.props.textInputProps;
+    let {
+      onFocus,
+      clearButtonMode,
+      InputComp,
+      ...userProps
+    } = this.props.textInputProps;
+    const TextInputComp = !!InputComp ? InputComp : TextInput;
     return (
       <View
         style={[
@@ -850,8 +856,7 @@ export default class GooglePlacesAutocomplete extends Component {
               this.props.styles.textInputContainer,
             ]}>
             {this._renderLeftButton()}
-
-            <TextInput
+            <TextInputComp
               ref="textInput"
               editable={this.props.editable}
               returnKeyType={this.props.returnKeyType}
