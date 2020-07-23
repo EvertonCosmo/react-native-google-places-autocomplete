@@ -717,7 +717,7 @@ export default class GooglePlacesAutocomplete extends Component {
   _renderRow = (rowData = {}, sectionID, rowID) => {
     return (
       <ScrollView
-        style={{ flex: 1, zIndex: 3 }}
+        style={{ flex: 1, zIndex: 100 }}
         scrollEnabled={this.props.isRowScrollable}
         keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
         horizontal={true}
@@ -731,6 +731,7 @@ export default class GooglePlacesAutocomplete extends Component {
         >
           <View
             style={[
+              { zIndex: 100 },
               this.props.suppressDefaultStyles ? {} : defaultStyles.row,
               this.props.styles.row,
               rowData.isPredefinedPlace ? this.props.styles.specialItemRow : {},
